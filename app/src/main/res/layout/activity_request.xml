@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    tools:context="com.wordpress.necessitateapps.picme.RequestActivity"
+
+    android:id="@+id/layout">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/holder"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        >
+        <ImageView
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:id="@+id/image_exit"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_clear"
+            android:tint="@color/colorPrimary"
+            android:layout_gravity="center"/>
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/edit_friends"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:hint="@string/request_or_send_pictures"
+        android:textSize="16sp"
+        android:inputType="text"
+        android:textColor="@color/colorPrimaryDark"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_weight="10"
+        />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp"
+     >
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/button_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:padding="15dp"
+            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_defaultColor="#4ccbe7"
+            fancy:fb_focusColor="#308294"
+            fancy:fb_radius="30dp"
+            fancy:fb_text="@string/send"
+            fancy:fb_textColor="#FFFFFF" />
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/button_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:padding="15dp"
+            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_defaultColor="#38e170"
+            fancy:fb_focusColor="#217c3f"
+            fancy:fb_radius="30dp"
+            fancy:fb_text="@string/request"
+            fancy:fb_textColor="#FFFFFF"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

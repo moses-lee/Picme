@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "128214877172",
+    "firebase_url": "https://picme-c64d3.firebaseio.com",
+    "project_id": "picme-c64d3",
+    "storage_bucket": "picme-c64d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128214877172:android:4369ace5a72672f7",
+        "android_client_info": {
+          "package_name": "com.wordpress.necessitateapps.picme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128214877172-v1r98s4q3tpo3fp1ghqepmmllgit71km.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wordpress.necessitateapps.picme",
+            "certificate_hash": "f7e56c9d2f962713b7aac45c8e1cccceb7651d38"
+          }
+        },
+        {
+          "client_id": "128214877172-tma1b6nrj0ood5vv15u64donm1u1pi27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDVRJKIryE--lt23UDVuxAWobIrZtcaYg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128214877172-tma1b6nrj0ood5vv15u64donm1u1pi27.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
