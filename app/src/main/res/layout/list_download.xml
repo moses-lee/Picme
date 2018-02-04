@@ -6,6 +6,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp">
 
+
     <ImageView
         android:id="@+id/image_download"
         android:layout_width="300dp"
@@ -13,5 +14,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+
+<!--    <RelativeLayout
+        android:background="#64000000"
+        android:layout_width="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/image_download_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_download"
+            android:padding="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_alignParentEnd="true"/>
+
+
+    </RelativeLayout>-->
 
 </android.support.constraint.ConstraintLayout>

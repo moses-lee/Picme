@@ -106,7 +106,7 @@ public class HistoryFragment extends Fragment {
                     public void onClick(View v) {
                         Intent i=new Intent(getActivity(), ImageDownloaderActivity.class);
                         i.putExtra("key",receivedKey);
-                        databaseRequests.child(userUID2).child(receivedKey).child("replied").setValue(true);
+                        databaseRequests.child(userUID).child(receivedKey).child("replied").setValue(true);
                         startActivity(i);
                     }
                 });
@@ -148,6 +148,8 @@ public class HistoryFragment extends Fragment {
                     ImageView imageReceived = mView.findViewById(R.id.image_received);
                     if(profilepic!=null&&!profilepic.isEmpty())
                         Picasso.with(ctx).load(profilepic).fit().centerCrop().into(imageReceived);
+
+
                 }
 
                 @Override

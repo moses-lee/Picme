@@ -189,7 +189,7 @@ public class ImageDownloaderActivity extends AppCompatActivity {
 
         public void setImage(final Context ctx, final String image) {
             ImageView imageDownload=mView.findViewById(R.id.image_download);
-            Picasso.with(ctx).load(image).resize(300,300).into(imageDownload);
+            Picasso.with(ctx).load(image).fit().centerCrop().into(imageDownload);
 
         }
     }
