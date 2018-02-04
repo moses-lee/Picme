@@ -179,7 +179,8 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String profilepic=(String)dataSnapshot.child("profilepic").getValue();
-                Picasso.with(getActivity()).load(profilepic).fit().centerCrop().into(imageProfile);
+                if(profilepic!=null&&!profilepic.isEmpty())
+                    Picasso.with(getActivity()).load(profilepic).fit().centerCrop().into(imageProfile);
 
             }
 

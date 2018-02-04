@@ -468,7 +468,8 @@ public class RequestActivity extends AppCompatActivity {
                     TextView nName = mView.findViewById(R.id.text_friend);
                     nName.setText(name);
                     ImageView post_image = mView.findViewById(R.id.image_friend);
-                    Picasso.with(ctx).load(profilepic).fit().centerCrop().into(post_image);
+                    if(profilepic!=null&&!profilepic.isEmpty())
+                        Picasso.with(ctx).load(profilepic).fit().centerCrop().into(post_image);
                 }
 
                 @Override

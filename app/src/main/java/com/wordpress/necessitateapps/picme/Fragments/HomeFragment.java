@@ -128,7 +128,8 @@ public class HomeFragment extends Fragment {
                 if(name!=null)
                     textName.setText(name);
 
-                Picasso.with(getActivity()).load(profilepic).fit().centerCrop().into(imageProfile);
+                if(profilepic!=null&&!profilepic.isEmpty())
+                 Picasso.with(getActivity()).load(profilepic).fit().centerCrop().into(imageProfile);
             }
 
             @Override
@@ -205,7 +206,9 @@ public class HomeFragment extends Fragment {
                     TextView textRequestName=mView.findViewById(R.id.text_request_name);
                     textRequestName.setText(name+" sent a photo request");
                     ImageView imageRequest = mView.findViewById(R.id.image_request);
-                    Picasso.with(ctx).load(profilepic).fit().centerCrop().into(imageRequest);
+
+                    if(profilepic!=null&&!profilepic.isEmpty())
+                        Picasso.with(ctx).load(profilepic).fit().centerCrop().into(imageRequest);
                 }
 
                 @Override

@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,8 +95,12 @@ public class HistoryFragment extends Fragment {
                 viewHolder.setMsg(model.getMsg());
                 viewHolder.setReplied( model.isReplied());
 
-
                 final String receivedKey=getRef(position).getKey();
+                if(receivedKey!=null||!receivedKey.isEmpty()){
+                    textWarning.setVisibility(View.GONE);
+                }
+
+
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -109,9 +114,7 @@ public class HistoryFragment extends Fragment {
             }
         };
 
-        if(firebaseRecyclerAdapter.getItemCount()!=0){
-            textWarning.setVisibility(View.GONE);
-        }
+
         mRecycle.setAdapter(firebaseRecyclerAdapter);
     }
     public static class ImageViewHolder extends RecyclerView.ViewHolder {
@@ -143,7 +146,8 @@ public class HistoryFragment extends Fragment {
 
                     textName.setText(name);
                     ImageView imageReceived = mView.findViewById(R.id.image_received);
-                    Picasso.with(ctx).load(profilepic).fit().centerCrop().into(imageReceived);
+                    if(profilepic!=null&&!profilepic.isEmpty())
+                        Picasso.with(ctx).load(profilepic).fit().centerCrop().into(imageReceived);
                 }
 
                 @Override

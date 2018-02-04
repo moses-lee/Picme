@@ -183,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
     //authenticate user
     private void auth(final String email, final String password){
         final MaterialDialog dialog = new MaterialDialog.Builder(this)
-                .title("Loggin In")
+                .title("Logging In")
                 .content("Please Wait")
                 .progress(true, 0)
                 .show();
