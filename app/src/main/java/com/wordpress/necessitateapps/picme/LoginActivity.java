@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private boolean signedOut=false;
     private LinearLayout layoutLogin,layoutRegister;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseUsers,databaseNames;
@@ -48,6 +49,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        try{
+            signedOut=getIntent().getExtras().getBoolean("signedout");
+        }catch (NullPointerException e){
+
+        }
+
 
         TextView buttonLogin=findViewById(R.id.button_login);
         TextView buttonGoToRegister=findViewById(R.id.button_gotoregister);
@@ -60,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         ImageView imageClear = findViewById(R.id.image_clear);
         layoutLogin=findViewById(R.id.layout_login);
         layoutRegister=findViewById(R.id.layout_register);
+
 
         databaseUsers= FirebaseDatabase.getInstance().getReference().child("Users");
         databaseUsers.keepSynced(true);
@@ -142,12 +151,6 @@ public class LoginActivity extends AppCompatActivity {
 
             return;
         }
-        if (TextUtils.isEmpty(password)) {
-            Snackbar.make(layoutLogin, "Password field is missing", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-
-            return;
-        }
 
         getEmailLogin(name, password);
 
@@ -219,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         if (name.length()<4) {
             editNameRegister.requestFocus();
-            editNameRegister.setError("Name must be 15 characters max!");
+            editNameRegister.setError("Name must be 4 characters minimum!");
             return;
         }
         if (name.length()>15) {
@@ -343,4 +346,11 @@ public class LoginActivity extends AppCompatActivity {
         return matcher.matches();
     }
 
+    @Override
+    public void onBackPressed() {
+        if(!signedOut){
+            super.onBackPressed();
+        }
+
+    }
 }

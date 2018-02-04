@@ -6,8 +6,8 @@ android {
         applicationId "com.wordpress.necessitateapps.picme"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 9
-        versionName "v.2.0.2"
+        versionCode 1
+        versionName "v.1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -43,12 +43,15 @@ dependencies {
     //dialog
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.6.+'
-
+    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
+
+
+
 
 
 

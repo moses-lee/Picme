@@ -15,7 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.skyfishjy.library.RippleBackground;
+import com.squareup.picasso.Picasso;
 import com.wordpress.necessitateapps.picme.Fragments.FriendsFragment;
 import com.wordpress.necessitateapps.picme.Fragments.HistoryFragment;
 import com.wordpress.necessitateapps.picme.Fragments.HomeFragment;
@@ -49,9 +58,37 @@ public class MainActivity extends AppCompatActivity
         fragmentManager.beginTransaction().add(R.id.frame, new HomeFragment()).commit();
         navigationView.setCheckedItem(R.id.nav_home);
 
+        DatabaseReference databaseUsers= FirebaseDatabase.getInstance().getReference().child("Users");
+        databaseUsers.keepSynced(true);
+
+        //getInfo(navigationView, databaseUsers);
+
+
     }
 
-    @Override
+ /*   private void getInfo(NavigationView navigationView, DatabaseReference databaseUsers) {
+        //grabs user's id
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String userUID = mAuth.getCurrentUser().getUid();
+
+        View nView =  navigationView.getHeaderView(0);
+        final ImageView imageNav=nView.findViewById(R.id.image_nav);
+
+        databaseUsers.child(userUID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String profilepic = (String) dataSnapshot.child("profilepic").getValue();
+                Picasso.with(MainActivity.this).load(profilepic).fit().centerCrop().into(imageNav);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }*/
+
+        @Override
     public void onBackPressed() {
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -75,7 +112,7 @@ public class MainActivity extends AppCompatActivity
             fragment= new HomeFragment();
             // Set action bar title
             setTitle(item.getTitle());
-        } else if (id == R.id.nav_history) {
+        } else if (id == R.id.nav_received) {
             fragment= new HistoryFragment();
             setTitle(item.getTitle());
 
@@ -86,6 +123,8 @@ public class MainActivity extends AppCompatActivity
             fragment= new SettingsFragment();
             setTitle(item.getTitle());
         }
+
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 

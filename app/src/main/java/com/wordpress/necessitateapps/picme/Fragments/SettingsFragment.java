@@ -2,8 +2,10 @@ package com.wordpress.necessitateapps.picme.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +37,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+import com.wordpress.necessitateapps.picme.LoginActivity;
 import com.wordpress.necessitateapps.picme.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -63,7 +67,20 @@ public class SettingsFragment extends Fragment {
 
         TextView textLogOut=view.findViewById(R.id.text_logout);
         TextView textPic=view.findViewById(R.id.text_pic);
-        Switch switchAuto=view.findViewById(R.id.switch_auto);
+
+
+        //getting the version name
+        TextView textVersion=view.findViewById(R.id.text_version);
+        try {
+            PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+            String version = pInfo.versionName;
+            textVersion.setText(version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+       /* Switch switchAuto=view.findViewById(R.id.switch_auto);
 
 
 
@@ -83,11 +100,12 @@ public class SettingsFragment extends Fragment {
                     editor.apply();
                 }
             }
-        });
+        });*/
         textLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signOut();
+                logOut(mAuth);
+
             }
         });
 
@@ -102,6 +120,35 @@ public class SettingsFragment extends Fragment {
 
         getUser();
         return view;
+    }
+
+    private void logOut(final FirebaseAuth mAuth){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        mBuilder.setMessage("Sign Out?");
+        mBuilder.setCancelable(true);
+
+        mBuilder.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mAuth.signOut();
+                        Intent i=new Intent(getActivity(), LoginActivity.class);
+                        i.putExtra("signedout", true);
+                        startActivity(i);
+                        dialog.cancel();
+                    }
+                });
+
+        mBuilder.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
     }
 
     //asks permission for reading storage
@@ -145,8 +192,6 @@ public class SettingsFragment extends Fragment {
 
     //saves the image to storage & database
     private void saveEdit() {
-
-
 
         if(eImageUri!=null){
             StorageReference mStorage= FirebaseStorage.getInstance().getReference().child("profilepics/");
@@ -207,6 +252,12 @@ public class SettingsFragment extends Fragment {
                 Toast.makeText(getActivity(), "Needs Access to Gallery to Update Image", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        saveEdit();
     }
 
     @Override

@@ -12,9 +12,11 @@
     <string name="username">Username</string>
     <string name="log_out">Log Out</string>
     <string name="automatically_save_images">Automatically Save Images</string>
-    <string name="request_or_send_pictures">Request or Send Pictures</string>
+
     <string name="request">Request</string>
     <string name="send">Send</string>
     <string name="change_profile_picture">Change Profile Picture</string>
     <string name="log_in">Log In</string>
+    <string name="search_by_username">Search By Username</string>
+    <string name="no_received_images_yet">No Received Images Yet</string>
 </resources>
