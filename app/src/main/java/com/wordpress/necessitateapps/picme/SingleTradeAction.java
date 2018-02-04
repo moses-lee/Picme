@@ -50,18 +50,33 @@ public class SingleTradeAction extends AppCompatActivity {
     private final static int GALLERY_CODE = 0;
     private String key=null, type=null, userUID2=null;
     private String userUID;
-    private DatabaseReference databaseRequests;
+    private DatabaseReference databaseRequests, databaseRequestsTemp;
+    private String tempKey=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_trade_action);
 
         key=getIntent().getExtras().getString("key");
+        tempKey=key;
         type=getIntent().getExtras().getString("type");
         userUID2=getIntent().getExtras().getString("userUID2");
 
         ImageView imageDelete=findViewById(R.id.image_delete);
-        if(!key.isEmpty()){
+
+        databaseRequestsTemp= FirebaseDatabase.getInstance().getReference().child("Requests");
+        databaseRequestsTemp.keepSynced(true);
+
+        if(key.isEmpty()){
+            DatabaseReference requestKey=databaseRequestsTemp.push();
+            key=requestKey.getKey();
+
+        }
+
+        databaseRequests= FirebaseDatabase.getInstance().getReference().child("Requests").child(userUID2).child(key);
+        databaseRequests.keepSynced(true);
+
+        if(tempKey!=null&&!tempKey.isEmpty()){
             imageDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -74,15 +89,6 @@ public class SingleTradeAction extends AppCompatActivity {
             imageDelete.setVisibility(View.GONE);
         }
 
-        if(key.isEmpty()){
-            DatabaseReference databaseRequestsTemp= FirebaseDatabase.getInstance().getReference().child("Requests");
-            databaseRequestsTemp.keepSynced(true);
-            DatabaseReference requestKey=databaseRequestsTemp.push();
-            key=requestKey.getKey();
-
-        }
-        databaseRequests= FirebaseDatabase.getInstance().getReference().child("Requests").child(userUID2).child(key);
-        databaseRequests.keepSynced(true);
 
         FancyButton buttonSend=findViewById(R.id.button_trade_send);
         FancyButton buttonRequest=findViewById(R.id.button_trade_request);
@@ -171,7 +177,7 @@ public class SingleTradeAction extends AppCompatActivity {
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        databaseRequests.removeValue();
+                        databaseRequestsTemp.child(userUID).child(key).removeValue();
                         finish();
                     }
                 });
@@ -297,7 +303,7 @@ public class SingleTradeAction extends AppCompatActivity {
                     imageID.child("key").setValue(key);
                     imageID.child("image").setValue(imagesRef.get(i));
                 }
-
+                databaseRequestsTemp.child(userUID).child(key).removeValue();
                 databaseRequests.child("from").setValue(userUID);
                 databaseRequests.child("id").setValue(key);
                 databaseRequests.child("replied").setValue(false);

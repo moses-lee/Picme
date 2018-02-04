@@ -166,12 +166,14 @@ public class RequestActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int number=(int)dataSnapshot.getChildrenCount();
-
+                int i=0;
                 if(number!=0){
                     friends= new String[number];
                     for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+
                         String name = (String) dsp.child("name").getValue();
-                        friends[number-1]=name;
+                        friends[i]=name;
+                        i++;
                     }
                 }
 
@@ -190,8 +192,6 @@ public class RequestActivity extends AppCompatActivity {
     }
 
     private void getAutoComplete(String[] friends){
-
-
         if(friends!=null){
             ArrayAdapter<String> adapter =
                     new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, friends);
